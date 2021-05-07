@@ -1,0 +1,14 @@
+{
+    "name": "fishpig/magento2-force-seo-urls",
+    "description": "Redirect system URLs (eg. catalog/product/view/id/123) to the proper SEO URL.",
+    "type": "magento2-module",
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "FishPig\\ForceSeoUrls\\": ""
+        }
+    },
+    "version": "1.0.0"
+}
