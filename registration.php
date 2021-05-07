@@ -4,4 +4,4 @@
  */
 use Magento\Framework\Component\ComponentRegistrar;
 
-ComponentRegistrar::register(ComponentRegistrar::MODULE, 'FishPig_ProductForceSeoUrls', __DIR__);
+ComponentRegistrar::register(ComponentRegistrar::MODULE, 'FishPig_ForceSeoUrls', __DIR__);
