@@ -13,6 +13,21 @@ class ViewPlugin
     /**
      *
      */
+    private $request = null;
+
+    /**
+     *
+     */
+    private $resultFactory = null;
+
+    /**
+     *
+     */
+    private $productRepo = null;
+
+    /**
+     *
+     */
     public function __construct(
         \Magento\Framework\App\RequestInterface $request,
         \Magento\Framework\Controller\ResultFactory $resultFactory,
@@ -22,7 +37,7 @@ class ViewPlugin
         $this->resultFactory = $resultFactory;
         $this->productRepo = $productRepo;
     }
-    
+
     /**
      * @param  View $subject
      * @param  \Closure $calback
@@ -30,22 +45,22 @@ class ViewPlugin
     public function aroundExecute(View $subject, \Closure $callback)
     {
         $find = '/catalog/product/view/';
-        
+
         if (strpos($this->request->getOriginalPathInfo(), $find) !== 0) {
             return $callback();
         }
-        
+
         try {
             $product = $this->productRepo->getById(
                 (int)$this->request->getParam('id')
             );
-            
+
             $productUrl = $product->getProductUrl();
-            
+
             if (strpos($productUrl, $find) === 0) {
                 throw new \Exception('Unable to get SEO URL for product.');
             }
-            
+
             return $this->resultFactory->create(
                 $this->resultFactory::TYPE_REDIRECT
             )->setUrl(
